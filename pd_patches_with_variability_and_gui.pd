@@ -1,0 +1,35 @@
+#N canvas 100 100 950 850 12;
+
+--- MIDI CONTROL ---
+#X obj 50 20 ctlin 1; [s plant_prob]   <-- Plant Activity
+#X obj 50 50 ctlin 40; [s weather_vibe] <-- Weather
+
+--- MASTER CLOCK ---
+#X obj 300 20 metro 125; [s tick]
+
+--- SEQUENCER 1: THE LEAD (16-64 steps) ---
+#X obj 50 150 bop.ui; <-- GUI Pattern Editor
+#X obj 50 180 r tick; 
+#X obj 50 210 random 100;
+#X obj 50 240 expr $f1 < $f2; <-- Probability Gate (Gate Silence)
+#X obj 50 270 spigot; <-- Note or Silence
+#X obj 50 300 bop.casio~;
+#X connect 180 0 210 0; # connect 210 0 240 0; # connect 1 0 240 1; 
+
+--- SEQUENCER 2: THE PAD (16-64 steps) ---
+#X obj 350 150 bop.ui; <-- GUI Pattern Editor
+#X obj 350 300 bop.fm~;
+
+--- SEQUENCER 3: THE BASS (16-64 steps) ---
+#X obj 650 150 bop.ui; <-- GUI Pattern Editor
+#X obj 650 300 bop.synth~;
+
+--- STEREO NATURE MUX (USB Interface) ---
+#X obj 50 500 adc~ 1 2; <-- USB Line-In nature mics
+#X obj 50 550 r bop.casio~; [+~]; r bop.fm~; [+~]; r bop.synth~; [bop.pan 0.5]; [s mus_l mus_r]
+#X obj 50 650 r mus_l; [+~]; adc~ 1; [dac~ 1]; <-- Mix to USB Out
+#X obj 150 650 r mus_r; [+~]; adc~ 2; [dac~ 2];
+
+--- HARDWARE MIDI ---
+#X obj 700 650 r tick; [makenote 100 250]; [noteout 1]
+

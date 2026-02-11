@@ -1,0 +1,53 @@
+#N canvas 100 100 900 800 12;
+
+--- RECEIVE DATA ---
+#X obj 50 20 ctlin 40; [s weather]
+#X obj 50 50 ctlin 51; [s pattern_idx]
+#X obj 50 80 ctlin 60; [/ 127]; [s amp_l]
+#X obj 50 110 ctlin 61; [/ 127]; [s amp_r]
+
+--- SEQUENCERS & SYNTHS ---
+#X obj 250 20 metro 125; [s clock]
+
+#X obj 250 100 r clock; [bop.sequence 16]; [r pattern_idx]; [bop.semisteps 0 3 7 10]; [bop.casio~]; [s lead]
+#X obj 250 150 r clock; [bop.sequence 32]; [r pattern_idx]; [bop.semisteps 0 7 12]; [bop.fm~]; [s pad]
+#X obj 250 200 r clock; [bop.sequence 64]; [r pattern_idx]; [bop.semisteps 0 5 7]; [bop.synth~]; [s bass]
+
+--- STEREO NATURE ENGINE ---
+#X obj 50 400 noise~; [bp~ 1500 2]; [*~]; [r amp_l]; [s nat_l]
+#X obj 150 400 noise~; [bp~ 1500 2]; [*~]; [r amp_r]; [s nat_r]
+
+--- MASTER STEREO MUX ---
+#X obj 250 500 r lead; [+~]; r pad; [+~]; r bass; [bop.reverb~]; [bop.pan 0.5]; [s mus_l mus_r]
+#X obj 50 600 r mus_l; [+~]; r nat_l; [dac~ 1]
+#X obj 150 600 r mus_r; [+~]; r nat_r; [dac~ 2]
+
+--- MIDI HARDWARE OUT ---
+#X obj 600 100 r lead; [makenote 100 250]; [noteout 1]
+
+
+[END]
+—-------
+
+OR:
+
+#N canvas 100 100 900 800 12;
+#X obj 50 20 ctlin 40; [s weather]
+#X obj 50 50 ctlin 51; [s pattern1]
+#X obj 50 80 ctlin 52; [s pattern2]
+
+--- SEQUENCERS ---
+#X obj 250 20 metro 130; [s tick]
+#X obj 250 100 r tick; [bop.sequence 16]; [r pattern1]; [bop.casio~]; [s lead_l lead_r]
+#X obj 250 150 r tick; [bop.sequence 32]; [r pattern2]; [bop.fm~]; [s pad_l pad_r]
+#X obj 250 200 r tick; [bop.sequence 64]; [bop.synth~]; [s bass_l bass_r]
+
+--- USB AUDIO IN (STEREO NATURE) ---
+#X obj 50 400 adc~ 1 2; [s nat_l nat_r]
+
+--- MASTER STEREO MIXER ---
+#X obj 50 500 r lead_l; [+~]; r pad_l; [+~]; r bass_l; [+~]; r nat_l; [dac~ 1]
+#X obj 150 500 r lead_r; [+~]; r pad_r; [+~]; r bass_r; [+~]; r nat_r; [dac~ 2]
+
+--- MIDI HARDWARE OUT ---
+#X obj 600 100 r tick; [makenote 100 250]; [noteout 1]
