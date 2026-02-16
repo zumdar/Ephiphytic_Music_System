@@ -40,7 +40,7 @@ NOISE_ALPHA = 0.02           # Noise floor learning rate
 THRESHOLD_K = 0.5            # LOWER = more notes
 MIN_NOISE = 0.0005
 
-REFRACTORY_S = 0.08          # Minimum time between notes (internal micro-refractory)
+REFRACTORY_S = 0.02         # Minimum time between notes (internal micro-refractory)
 
 # Slow drift accumulation (forces notes over time)
 DRIFT_ACCUM_THRESHOLD = 0.002
@@ -57,14 +57,14 @@ CC_RATE_HZ = 10.0
 
 # New tuning: require stronger/more "interesting" events
 SIGN_CHANGE_REQUIRED = True      # require derivative sign change for peaks
-THRESH_MULTIPLIER = 1.8         # require mag > threshold * multiplier to be interesting
+THRESH_MULTIPLIER = 1.2        # require mag > threshold * multiplier to be interesting
 PROB_BASE = 0.20                # base probability to actually send when interesting
 PROB_SCALE = 0.6                # extra probability scaling with strength
 
 # Additional gating to avoid floods: make interesting events more "spontaneous"
-MIN_EVENT_INTERVAL = 3.0       # minimum seconds between distinct interesting events
-EVENT_SUPPRESSION_MIN = 0.4    # minimum extra suppression after an event
-EVENT_SUPPRESSION_SCALE = 2.5  # scales suppression inverse to strength
+MIN_EVENT_INTERVAL = 0.1  # minimum seconds between distinct interesting events
+EVENT_SUPPRESSION_MIN = 0.05  # minimum extra suppression after an event
+EVENT_SUPPRESSION_SCALE = 1 # scales suppression inverse to strength
 MAX_NOTES_PER_EVENT = 5        # usually send one note per event
 
 

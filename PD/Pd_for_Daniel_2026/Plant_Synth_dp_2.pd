@@ -1,4 +1,4 @@
-#N canvas 555 52 2005 1273 12;
+#N canvas 9 0 2551 1273 12;
 #X obj 159 379 makenote;
 #X obj 188 354 nbx 5 17 -1e+37 1e+37 0 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
 #X obj 258 355 nbx 5 17 -1e+37 1e+37 0 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 256;
@@ -160,7 +160,7 @@
 #A saved osc1-pulsewidth 0.5;
 #A saved osc1-gain 0.628571;
 #A saved osc2-wave 0;
-#A saved osc2-tune 0;
+#A saved osc2-tune 12;
 #A saved osc2-pulsewidth 0.442857;
 #A saved osc2-gain 0.535714;
 #A saved noise 0.25;
@@ -172,7 +172,7 @@
 #A saved decay 0.3;
 #A saved sustain 0.35;
 #A saved release 0.585714;
-#A saved gain 0.828571;
+#A saved gain 0.907143;
 #X obj 932 104 bop.ui;
 #X obj 756 634 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 689 235 transmuter;
@@ -364,12 +364,12 @@
 #X msg 116 807 open;
 #X obj 49 962 cnv 19 200 80 empty empty empty 20 12 0 12 #ffe3c6 #404040 0;
 #X obj 55 887 bop.strum, f 23;
-#A saved strum 0;
+#A saved strum 0.501268;
 #A saved chord 2;
 #A saved shuffle 0;
-#A saved root 48;
+#A saved root 52;
 #A saved octaves 3;
-#A saved velocity 0.2;
+#A saved velocity 0.477611;
 #A saved duration 0.828571;
 #X obj 85 1130 hip~ 80;
 #X msg 57 714 stop \, strum 0 1 4000;
@@ -393,7 +393,7 @@
 #A saved decay 0.3;
 #A saved sustain 0.4;
 #A saved release 0.521429;
-#A saved gain 0.785714;
+#A saved gain 0.642857;
 #X obj 424 60 bop.ui;
 #X obj 282 746 bop.reverb~;
 #A saved size 0.985714;
